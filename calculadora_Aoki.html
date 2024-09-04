@@ -25,25 +25,25 @@
         var meta = Number(input_meta.value);
         var total = produzida + perda;
         var por_perda = perda / total * 100;
-        var por_produzida = produzida / meta * 100;
         var dis_meta = meta - produzida;
-        var aumento = produzida * 1.4;
+        var redução = perda * 0.5
+        var aumento = redução + produzida;
 
         if (total == meta) {
             div_mensagem.innerHTML = `Se não fosse as perdas, você teria atingido sua meta!
             <br> As perdas equivalem a: ${por_perda}% da sua meta.
-            <br> E falta ${dis_meta}Kg para você atingir sua meta
+            <br> Falta ${dis_meta}Kg para você atingir sua meta
             `
 
             if (aumento >= meta) {
-                div_mensagem2.innerHTML = `Com nossa solução sua produção aumentaria em até 40%. 
+                div_mensagem2.innerHTML = `Com nossa solução suas perdas diminuirão em até 50%. 
                 Indo de ${produzida}Kg para ${aumento}Kg. Desta forma ultrapassando sua meta!
                 `
             }
 
             if (aumento < meta) {
                 div_mensagem2.innerHTML = `Com nossa solução infelizmente sua produção não ultrapassaria sua meta.<br>
-                Mas com o aumento de até 40%, sua produção iria de ${produzida}Kg para ${aumento}Kg.
+                Mas as suas perdas diminuirão em até 50%, sua produção iria de ${produzida}Kg para ${aumento}Kg.
                 `
             }
         }
@@ -54,14 +54,14 @@
             `
 
             if (aumento >= meta) {
-                div_mensagem2.innerHTML = `Com nossa solução sua produção aumentaria em até 40%. 
+                div_mensagem2.innerHTML = `Com nossa solução suas perdas diminuirão em até 50%.
                 Indo de ${produzida}Kg para ${aumento}Kg. Desta forma ultrapassando sua meta!
                 `
             }
 
             if (aumento < meta) {
                 div_mensagem2.innerHTML = `Com nossa solução infelizmente sua produção não ultrapassaria sua meta.<br>
-                Mas com o aumento de até 40%, sua produção iria de ${produzida}Kg para ${aumento}Kg.
+                Mas as suas perdas diminuirão em até 50%, sua produção iria de ${produzida}Kg para ${aumento}Kg.
                 `
             }
         }
@@ -72,14 +72,14 @@
             `
 
             if (aumento >= meta) {
-                div_mensagem2.innerHTML = `Com nossa solução sua produção aumentaria em até 40%. 
+                div_mensagem2.innerHTML = `Com nossa solução suas perdas diminuirão em até 50%.
                 Indo de ${produzida}Kg para ${aumento}Kg. Desta forma ultrapassando ou atingindo sua meta!
                 `
             }
 
             if (aumento < meta) {
                 div_mensagem2.innerHTML = `Com nossa solução infelizmente sua produção não ultrapassaria sua meta.<br>
-                Mas com o aumento de até 40%, sua produção iria de ${produzida}Kg para ${aumento}Kg.
+                Mas as suas perdas diminuirão em até 50%, sua produção iria de ${produzida}Kg para ${aumento}Kg.
                 `
             }
         }
