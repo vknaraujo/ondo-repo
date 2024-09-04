@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    <h3>Olá produtor de Wasabi, vamos simular o retorno financeiro da sua safra? </h3><br>
+
+    Em metro quadrado, qual será o tamanho da sua plantação? 
+    <input type="number" id="input_tmnPlantacao" min="0"> <br><br>
+
+    Em centimetros qual será o espaçamento entre as mudas de wasabi? (Valor recomendado entre 20-30)
+    <input type="number" id="input_espaco" min="0"> <br><br>
+
+    A quanto você está vendendo o kilo do wasabi?
+    <input type="number" id="input_precoKG" min="0"> <br><br>
+
+    <button onclick="calcular()">Calcular retorno</button><br><br>
+
+    <div id="div_informacao"></div>
+
+</body>
+</html>
+
+<script>
+    function calcular(){
+        var tamanho = Number(input_tmnPlantacao.value);
+        var espacoMuda = Number(input_espaco.value);
+        var precoKG = Number(input_precoKG.value);
+
+    // Converter o espaçamento de centímetros para metros
+        var espacoMudaMetros = espacoMuda / 100;
+
+    // Calcular a área ocupada por cada muda
+        var areaPorMuda = espacoMudaMetros * espacoMudaMetros;
+
+    // Calcular a quantidade de mudas
+        var quantidadeMudas = tamanho / areaPorMuda;
+
+    // Calcular o peso em media da colheita
+        var KGcolheita = quantidadeMudas * 0.12
+
+    // Retorno em reais
+       var retorno = KGcolheita * precoKG
+
+    div_informacao.innerHTML = `<p>Se o cultivo for correto e a temperatura permanecer a ideal, você não terá perdas e consiguirá um retorno de aproximadamente<b> ${retorno} R$</b><br> você produzirá uma estimativa de ${KGcolheita}KG e venderá por ${precoKG} R$ o kilo.</p>`;
+    }
+</script>
