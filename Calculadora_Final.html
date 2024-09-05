@@ -15,10 +15,11 @@
     -->
     Inserir metros quadrados de plantação: <input type="number" id="input_area"> <br>
     Inserir espaçamento entre as mudas (recomendado: 20cm a 30cm): <input type="number" id="input_espaço"> <br>
+    Quanto vôce está vendendo o kilo do wasabi? (R$) <input type="number" id="input_preço"> <br>
     Inserir custo de energia Mensal (R$): <input type="number" id="input_energia"> <br>
     Inserir custo de manutenção Mensal (R$): <input type="number" id="input_manutencao"> <br>
+    Inserir custo de água Mensal (R$): <input type="number" id="input_agua"> <br>
     Inserir outros custos mensais (R$): <input type="number" id="input_outros"> <br>
-    Quanto vôce está vendendo o kilo do wasabi? (R$) <input type="number" id="input_preço"> <br>
 
     <Button onclick="analisar()">Analisar Dados</Button> <br>
 
@@ -27,22 +28,33 @@
 </html>
 
 <script>
-    var area = Number(input_area.value)
-    var espaço = Number(input_espaço.value)
-    var preço = Number(input_preço.value)
-    var espaçoMetro = espaço / 100
-    var areaMuda = espaçoMetro * espaçoMetro
-    var qtdMuda = area / areaMuda
-    var pesoTotal = qtdMuda * 0.12
-    var retorno = pesoTotal * preço
+    function analisar() {
+        var area = Number(input_area.value)
+        var espaço = Number(input_espaço.value)
+        var preço = Number(input_preço.value)
+        var espaçoMetro = espaço / 100
+        var areaMuda = espaçoMetro * espaçoMetro
+        var qtdMuda = area / areaMuda
+        var pesoTotal = qtdMuda * 0.12
+        var retorno = pesoTotal * preço
 
-    div_mensagem.innerHTML = `
-        Se o cultivo for correto e a temperatura permanecer a ideal, 
-        você não terá perdas e consiguirá um retorno de aproximadamente R$${retorno}<br>
-        Você produzirá uma estimativa de ${pesoTotal}KG e venderá por R$${preço} o kilo.
-        `
+        var mensagem = `
+            Se o cultivo for correto e a temperatura permanecer a ideal, 
+            você não terá perdas e consiguirá um retorno de aproximadamente R$${retorno}<br>
+            Você produzirá uma estimativa de ${pesoTotal}KG e venderá por R$${preço} o kilo. <br>
+            `
 
-    var energia = Number(input_energia.value)
-    var manutencao = Number(input_manutencao.value)
-    var outros = Number(input_outros.value)
+        var energia = Number(input_energia.value) * 24
+        var manutencao = Number(input_manutencao.value) * 24
+        var agua = Number(input_agua.value) * 24
+        var outros = Number(input_outros.value) * 24
+        var custoTotal = energia + manutencao + outros + agua
+        var lucroLiquido = retorno - custoTotal
+
+        if (lucroLiquido == 0) {
+            
+        }
+
+        div_mensagem.innerHTML = mensagem
+    }
 </script>
