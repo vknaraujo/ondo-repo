@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body>
+    <h1>Ondo</h1>
+
+    Inserir metros quadrados de plantação: <input type="number" id="input_area"> <br>
+    Inserir espaçamento entre as mudas (recomendado: 20cm a 30cm): <input type="number" id="input_espaço"> <br>
+    Quanto vôce está vendendo o kilo do wasabi? (R$) <input type="number" id="input_preço"> <br>
+    Inserir custo de energia Mensal (R$): <input type="number" id="input_energia"> <br>
+    Inserir custo de manutenção Mensal (R$): <input type="number" id="input_manutencao"> <br>
+    Inserir custo de água Mensal (R$): <input type="number" id="input_agua"> <br>
+    Inserir outros custos mensais (R$): <input type="number" id="input_outros"> <br>
+
+    <Button onclick="analisar()">Analisar Dados</Button> <br>
+
+    <p id="div_mensagem"></p>
+</body>
+</html>
+
+<script>
+    function analisar() {
+        var area = Number(input_area.value)
+        var espaço = Number(input_espaço.value)
+        var preço = Number(input_preço.value)
+        var espaçoMetro = espaço / 100
+        var areaMuda = espaçoMetro * espaçoMetro
+        var qtdMuda = area / areaMuda
+        var pesoTotal = qtdMuda * 0.12
+        var retorno = pesoTotal * preço
+
+        var mensagem = `
+            Se o cultivo for correto e a temperatura permanecer a ideal, 
+            você não terá perdas e consiguirá um retorno de aproximadamente R$${retorno}.<br>
+            Você produzirá uma estimativa de ${pesoTotal}KG e venderá por R$${preço} o kilo. <br>
+            `
+
+        var energia = Number(input_energia.value) * 24
+        var manutencao = Number(input_manutencao.value) * 24
+        var agua = Number(input_agua.value) * 24
+        var outros = Number(input_outros.value) * 24
+        var custoTotal = energia + manutencao + outros + agua
+        var lucroLiquido = retorno - custoTotal
+
+        if (lucroLiquido == 0) {
+            mensagem += `
+            Ao final dessa safra (2 anos), não havera lucro. já como seu Lucro Liquido será igual há: R$${lucroLiquido}.<br>
+            Considerar a implementação do projeto de controle de temperatura. 
+            Embora possa haver um custo inicial, 
+            a melhoria na eficiência energética e a qualidade do produto podem 
+            resultar em economias e aumento da receita a longo prazo.
+            `
+        }
+        if (lucroLiquido > 0) {
+            mensagem += `
+            Ao final dessa safra (2 anos), havera lucro. Que será de: R$${lucroLiquido}.<br>
+            `
+        } else {
+            mensagem += `
+            Ao final dessa safra (2 anos), havera prejuízo. Que será de: R$${lucroLiquido}.<br>
+            Considerar a implementação do projeto de controle de temperatura. 
+            Embora possa haver um custo inicial, 
+            a melhoria na eficiência energética e a qualidade do produto podem 
+            resultar em economias e aumento da receita a longo prazo.
+            `
+        }
+
+        div_mensagem.innerHTML = mensagem
+    }
+</script>

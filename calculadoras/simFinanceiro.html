@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+
+<body>
+
+    <h1>Calculadora Financeira</h1>
+
+    Receita (R$): <input type="number" id="inputReceita"><br><br>
+    Despesas (R$): <input type="number" id="inputDespesas"><br><br>
+    Custo das Mercadorias Vendidas (R$): <input type="number" id="inputCusto"><br><br>
+    Investimento Total (R$): <input type="number" id="inputInvestimento"><br><br>
+    Preço de Venda por Unidade (R$): <input type="number" id="inputPrecoVenda"><br><br>
+    Custo Variável por Unidade (R$): <input type="number" id="inputCustoVariavel"><br><br>
+    Custos Fixos (R$): <input type="number" id="inputCustosFixos"><br><br>
+    Número de Unidades Produzidas: <input type="number" id="inputUnidadesProduzidas"><br><br>
+
+    <button onclick="calcular()">Calcular</button>
+    <br><br>
+    <hr>
+    <h3>Resultado</h3>
+    <p id="p_lucroBruto">Lucro Bruto: R$ 0,00</p>
+    <p id="p_lucroLiquido">Lucro Líquido: R$ 0,00</p>
+    <p id="p_margemLucro">Margem de Lucro: 0%</p>
+    <p id="p_roi">ROI: 0%</p>
+    <p id="p_pontoEquilibrio">Ponto de Equilíbrio: 0 unidades</p>
+    <p id="p_fluxoCaixa">Fluxo de Caixa: R$ 0,00</p>
+    <p id="p_custoProducao">Custo de Produção por Unidade: R$ 0,00</p>
+    <hr>
+    <h3>Recomendações</h3>
+    <p id="p_recomendacao"></p>
+
+    <script>
+        function calcular() {
+            var receita = Number(inputReceita.value)
+            var despesas = Number(inputDespesas.value)
+            var custo = Number(inputCusto.value)
+            var investimento = Number(inputInvestimento.value)
+            var precoVenda = Number(inputPrecoVenda.value)
+            var custoVariavel = Number(inputCustoVariavel.value)
+            var custosFixos = Number(inputCustosFixos.value)
+            var unidadesProduzidas = Number(inputUnidadesProduzidas.value)
+            var lucroBruto = receita - custo
+            var lucroLiquido = receita - despesas
+            var margemLucro = 0
+            var roi = 0
+            var custoProducao = 0
+
+            if (receita > 0) {
+                margemLucro = (lucroLiquido / receita) * 100
+            }
+
+            if (investimento > 0) {
+                roi = (lucroLiquido / investimento) * 100
+            }
+
+            if (unidadesProduzidas > 0) {
+                custoProducao = (custo / unidadesProduzidas).toFixed(2)
+            }
+
+            var pontoEquilibrio = (custosFixos / (precoVenda - custoVariavel)).toFixed(2)
+            var fluxoCaixa = receita - despesas
+
+            p_lucroBruto.innerHTML = 'Lucro Bruto: R$ ' + lucroBruto.toFixed(2)
+            p_lucroLiquido.innerHTML = 'Lucro Líquido: R$ ' + lucroLiquido.toFixed(2)
+            p_margemLucro.innerHTML = 'Margem de Lucro: ' + margemLucro.toFixed(2) + '%'
+            p_roi.innerHTML = 'ROI: ' + roi.toFixed(2) + '%'
+            p_pontoEquilibrio.innerHTML = 'Ponto de Equilíbrio: ' + pontoEquilibrio + ' unidades'
+            p_fluxoCaixa.innerHTML = 'Fluxo de Caixa: R$ ' + fluxoCaixa.toFixed(2)
+            p_custoProducao.innerHTML = 'Custo de Produção por Unidade: R$ ' + custoProducao
+
+            var recomendacao = ''
+
+            if (lucroLiquido < 0) {
+                recomendacao = 'Sua empresa está com prejuízo. Considere reduzir despesas ou aumentar a receita para melhorar a rentabilidade.'
+            } else if (margemLucro < 10) {
+                recomendacao = 'A margem de lucro está baixa. Avalie a possibilidade de aumentar o preço de venda ou reduzir custos.'
+            } else if (pontoEquilibrio > unidadesProduzidas) {
+                recomendacao = 'Você está produzindo menos do que o ponto de equilíbrio. Considere aumentar a produção ou reduzir custos fixos.'
+            } else if (roi < 15) {
+                recomendacao = 'O ROI está abaixo do ideal. Tente otimizar os investimentos ou aumentar a receita.'
+            } else {
+                recomendacao = 'Sua empresa está com uma situação financeira saudável. Continue monitorando seus indicadores e ajuste conforme necessário.'
+            }
+            p_recomendacao.innerHTML = recomendacao
+        }
+    </script>
+
+</body>
+
+</html>
