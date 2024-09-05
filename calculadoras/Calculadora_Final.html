@@ -10,7 +10,7 @@
 
     Inserir metros quadrados de plantação: <input type="number" id="input_area"> <br>
     Inserir espaçamento entre as mudas (recomendado: 20cm a 30cm): <input type="number" id="input_espaço"> <br>
-    Quanto vôce está vendendo o kilo do wasabi? (R$) <input type="number" id="input_preço"> <br>
+    Por quanto vôce está vendendo o kilo do wasabi? (R$) <input type="number" id="input_preço"> <br>
     Inserir custo de energia Mensal (R$): <input type="number" id="input_energia"> <br>
     Inserir custo de manutenção Mensal (R$): <input type="number" id="input_manutencao"> <br>
     Inserir custo de água Mensal (R$): <input type="number" id="input_agua"> <br>
@@ -32,11 +32,14 @@
         var qtdMuda = area / areaMuda
         var pesoTotal = qtdMuda * 0.12
         var retorno = pesoTotal * preço
+        var preçoMuda = (pesoTotal / qtdMuda) * preço
 
         var mensagem = `
             Se o cultivo for correto e a temperatura permanecer a ideal, 
             você não terá perdas e consiguirá um retorno de aproximadamente R$${retorno}.<br>
             Você produzirá uma estimativa de ${pesoTotal}KG e venderá por R$${preço} o kilo. <br>
+            Considerando um peso médio de 120 gramas por muda de Wasabi, 
+            cada muda seria vendida por aproximadamente: R$${preçoMuda}. <br>
             `
 
         var energia = Number(input_energia.value) * 24
@@ -48,7 +51,8 @@
 
         if (lucroLiquido == 0) {
             mensagem += `
-            Ao final dessa safra (2 anos), não havera lucro. já como seu Lucro Liquido será igual há: R$${lucroLiquido}.<br>
+            Ao final dessa safra (2 anos), não havera lucro.
+             já como seu Lucro Liquido será igual há: R$${lucroLiquido}.<br>
             Considerar a implementação do projeto de controle de temperatura. 
             Embora possa haver um custo inicial, 
             a melhoria na eficiência energética e a qualidade do produto podem 
