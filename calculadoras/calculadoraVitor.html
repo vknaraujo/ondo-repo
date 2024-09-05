@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pagina inicial</title>
+</head>
+<body>
+    <p>quantidade de mudas de wasabi em produção</p>
+    <input type="text" id="iptMudas">
+    <p>m² na estufa</p>
+    <input type="text" id="iptM2">
+    <button onclick="calcular()">calculo</button><br>
+    <div id="dRes"></div>
+</body>
+</html>
+<script>
+    function calcular(){
+        var mudas = Number(iptMudas.value)
+        var m2 = Number(iptM2.value)
+
+        var was = mudas / 4;
+        var total = was * m2;
+
+        var sensor = m2 / 5;
+
+        dRes.innerHTML = `<br>Para ${was} conjuntos de 4 mudas de wasabi por m² em uma estufa de ${m2}m², você precisará de ${sensor} sensor(es).`;
+    }
+</script>
