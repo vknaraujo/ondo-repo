@@ -8,13 +8,13 @@
 <body>
     <h1>Ondo</h1>
 
-    Inserir metros quadrados de plantação: <input type="number" id="input_area"> <br>
-    Inserir espaçamento entre as mudas (recomendado: 20cm a 30cm): <input type="number" id="input_espaço"> <br>
-    Por quanto vôce está vendendo o kilo do wasabi? (R$) <input type="number" id="input_preço"> <br>
-    Inserir custo de energia Mensal (R$): <input type="number" id="input_energia"> <br>
-    Inserir custo de manutenção Mensal (R$): <input type="number" id="input_manutencao"> <br>
-    Inserir custo de água Mensal (R$): <input type="number" id="input_agua"> <br>
-    Inserir outros custos mensais (R$): <input type="number" id="input_outros"> <br>
+    Inserir metros quadrados de plantação: <input type="number" id="input_area"> <br> <br>
+    Inserir espaçamento entre as mudas (recomendado: 20cm a 30cm): <input type="number" id="input_espaço"> <br> <br>
+    Por quanto vôce está vendendo o kilo do wasabi? (R$) <input type="number" id="input_preço"> <br> <br>
+    Inserir custo de energia Mensal (R$): <input type="number" id="input_energia"> <br> <br>
+    Inserir custo de manutenção Mensal (R$): <input type="number" id="input_manutencao"> <br> <br>
+    Inserir custo de água Mensal (R$): <input type="number" id="input_agua"> <br> <br>
+    Inserir outros custos mensais (R$): <input type="number" id="input_outros"> <br> <br>
 
     <Button onclick="analisar()">Analisar Dados</Button> <br>
 
@@ -24,15 +24,15 @@
 
 <script>
     function analisar() {
-        var area = Number(input_area.value)
-        var espaço = Number(input_espaço.value)
-        var preço = Number(input_preço.value)
-        var espaçoMetro = espaço / 100
-        var areaMuda = espaçoMetro * espaçoMetro
-        var qtdMuda = area / areaMuda
-        var pesoTotal = qtdMuda * 0.12
-        var retorno = pesoTotal * preço
-        var preçoMuda = (pesoTotal / qtdMuda) * preço
+        var area = Number(input_area.value); //variavel da area de plantação
+        var espaço = Number(input_espaço.value); //variavel de espaçamento entre as mudas
+        var preço = Number(input_preço.value); //variavel do preço do kilo
+        var espaçoMetro = espaço / 100; //variavel do espaçamento em metros
+        var areaMuda = espaçoMetro * espaçoMetro; //variavel da area que cada muda ocupa
+        var qtdMuda = area / areaMuda; //variavel da quantidade de mudas
+        var pesoTotal = qtdMuda * 0.12; //variavel do peso aproximado da safra
+        var retorno = pesoTotal * preço; //variavel do ganho da safra (peso total * preço)
+        var preçoMuda = (pesoTotal / qtdMuda) * preço; //variavel do preço aproximado de cada muda
 
         var mensagem = `
             Se o cultivo for correto e a temperatura permanecer a ideal, 
@@ -42,12 +42,12 @@
             cada muda seria vendida por aproximadamente: R$${preçoMuda}. <br>
             `
 
-        var energia = Number(input_energia.value) * 24
-        var manutencao = Number(input_manutencao.value) * 24
-        var agua = Number(input_agua.value) * 24
-        var outros = Number(input_outros.value) * 24
-        var custoTotal = energia + manutencao + outros + agua
-        var lucroLiquido = retorno - custoTotal
+        var energia = Number(input_energia.value) * 24 //variavel do custo de energia em 2 anos
+        var manutencao = Number(input_manutencao.value) * 24 //variavel do custo de manutenção em 2 anos
+        var agua = Number(input_agua.value) * 24 //variavel do custo de água em 2 anos
+        var outros = Number(input_outros.value) * 24 //variavel dos outros custos em 2 anos
+        var custoTotal = energia + manutencao + outros + agua //variavel do custo total em 2 anos
+        var lucroLiquido = retorno - custoTotal //variavel do lucro liquido
 
         if (lucroLiquido == 0) {
             mensagem += `
