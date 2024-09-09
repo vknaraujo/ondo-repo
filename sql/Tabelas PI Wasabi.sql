@@ -25,21 +25,16 @@ select * from empresa;
 
 create table estufa (
 idEstufa int primary key auto_increment,
-empresa varchar(150),
+tamanho float (7,2),
 numero int
 ) auto_increment = 100;
 
 insert into estufa values
-	(default, 'Minato Wasabi', 1),
-    (default, 'Minato Wasabi', 2),
-    (default, 'Minato Wasabi', 3),
-    (default, 'Wasabi Bom', 1),
-    (default, 'Yama Wasabi', 1),
-    (default, 'Yama Wasabi', 2),
-    (default, 'Viva Wasabi', 1),
-    (default, 'Viva Wasabi', 2),
-    (default, 'Viva Wasabi', 3),
-    (default, 'Wasabi Chicara', 1);
+	(default, 100, 1),
+    (default, 60.5, 2),
+    (default, 30, 3),
+    (default, 40.30, 4),
+    (default, 55, 5);
     
 select * from estufa;
 
@@ -47,22 +42,21 @@ create table temperatura (
 idTemperatura int primary key auto_increment,
 temperatura float(3,1) not null,
 datahora datetime default current_timestamp,
-empresa varchar(250),
 estufa int
-) auto_increment = 10000;
+) auto_increment = 1000;
 
 insert into temperatura values
-	(default, 14.5, default, 'Minato Wasabi', 1),
-    (default, 14, default, 'Minato Wasabi', 3),
-    (default, 13, default, 'Minato Wasabi', 2),
-    (default, 14, default, 'Minato Wasabi', 1),
-    (default, 15.5, default, 'Minato Wasabi', 1),
-    (default, 20, default, 'Minato Wasabi', 3),
-    (default, 19.5, default, 'Minato Wasabi', 3),
-    (default, 13.5, default, 'Minato Wasabi', 2),
-    (default, 12.5, default, 'Minato Wasabi', 2),
-    (default, 17.5, default, 'Minato Wasabi', 1),
-    (default, 16.5, default, 'Minato Wasabi', 3);
+	(default, 14.5, default, 1),
+    (default, 14, default, 3),
+    (default, 13, default, 2),
+    (default, 14, default, 1),
+    (default, 15.5, default, 1),
+    (default, 20, default, 4),
+    (default, 19.5, default, 5),
+    (default, 13.5, default, 2),
+    (default, 12.5, default, 2),
+    (default, 17.5, default, 3),
+    (default, 16.5, default, 1);
     
 select * from temperatura;
 
@@ -70,17 +64,17 @@ create table aviso (
 idAviso int primary key auto_increment,
 temperatura float(3.1),
 mensagem varchar(50)
-) auto_increment = 2000;
+) auto_increment = 10000;
 
 alter table aviso add constraint chkAviso
-	check (mensagem in('temp ok', 'temp ruim', 'temp controlar'));
+	check (mensagem in('A temperatura está correta.', 'Alerta! A temperatura está fora do limite.', 'A temperatura exige atenção.'));
 
 insert into aviso values
-	(default, 19, 'temp controlar'),
-    (default, 9, 'temp controlar'),
-    (default, 12, 'temp ok'),
-    (default, 14, 'temp ok'),
-    (default, 21, 'temp ruim'),
-    (default, 7, 'temp ruim');
+	(default, 19, 'A temperatura exige atenção.'),
+    (default, 9, 'A temperatura exige atenção.'),
+    (default, 12, 'A temperatura está correta.'),
+    (default, 14, 'A temperatura está correta.'),
+    (default, 21, 'Alerta! A temperatura está fora do limite.'),
+    (default, 7, 'Alerta! A temperatura está fora do limite.');
 
 select * from aviso;
