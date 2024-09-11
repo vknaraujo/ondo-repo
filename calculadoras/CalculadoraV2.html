@@ -5,41 +5,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ONDO</title>
+    <style>
+        /* IMPORTANDO A FONT FAMILY MONTSERRAT */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        /* Mudando o corpo da pagina todo, e tudo que esta nele */
+        html {
+            margin: 0;
+            /*A PAGINA DO NAVEGADOR VEM COM ALGUMAS PREDEFINIÇÕES ESTOU ZERANDO A MARGIM E OS PADDING*/
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /*ESTOU FALANDO PARA TODO QUE ESTAO NA TAG BODY, RECEBAM A FONT MOSTSERRAT E O FUNDO DO BODY VAI SER #F5F5F5 hexadecimal */
+            font-family: "Montserrat", sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            /*TAG H1 (titulo), será verde e alinhada*/
+            padding-top: 20px;
+            color: #50984E;
+            text-align: center;
+        }
+
+        .div_conteudo {
+            display: flex;
+
+        }
+
+        .div_mensagem {
+            width: 50%;
+            padding: 30px 40px;
+            margin: 20px 40px 0px 20px;
+        }
+
+        .div_calculadora {
+            /*ESSA DIV FOI CRIADA COM TODOS OS INPUT
+            NELA COLOCO UM TAMAANHO, COR, ESPAÇAMENTO NA TELA, ESPAÇAMENTO DE DENTRO PARA FORA
+            SOMBRA E ARREDONDAMENTO*/
+            background-color: #ECECEC;
+            width: 50%;
+            padding: 30px 40px;
+            box-shadow: 0px 0px 10px #00000041;
+            border-radius: 8px;
+            margin: 20px 20px 0px 40px;
+        }
+
+        /* CHAMANDO A TAG SPAN QUE ESTA DENTRO DA DIV
+        DANDO UM TAMANHO, DEIXANDO ELA MEDIUM E DANDO UMA COR*/
+        .div_calculadora span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #262421;
+        }
+
+        .div_calculadora input {
+            /*COLOCANDO UM ESTILO EM TODOS OS INPUT
+            TAMANHO 100% que ocupa todo espaço que pode na div.calculadora
+            padding é "espaçamento para dentro", margem do topo, borda solida com cor e redonda
+            e um background color, colocando uma cor de fundo*/
+            width: 100%;
+
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #BDBDBD;
+            background-color: #F5F5F5;
+        }
+
+        input::placeholder {
+            /*Mexendo no placeholder (mensagem que aparece dentro da input, dando uma cor,
+            tamanho e opacidade )*/
+            color: #2624210;
+            opacity: 0.5;
+            font-size: 12px;
+        }
+
+        input:focus {
+            /* focus é mexendo na input quando é selecionada */
+            border: 1px solid #545454;
+            /* Cor e espessura da borda */
+            outline: none;
+            /* Remove o contorno padrão */
+        }
+
+        /* Botoes*/
+        button {
+            padding: 10px 8px;
+            border-radius: 8px;
+            border: none;
+            width: 90px;
+            color: #F5F5F5;
+            font-size: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn_lucro {
+            background-color: #50984E;
+        }
+
+        .btn_gastos {
+            background-color: #b43f3f;
+        }
+    </style>
 </head>
 
 <!-- Inicio do HTML -->
 
 <body>
-    <h1>Simulador Financeiro Ondo</h1>
-
+    <h1>Simulador Financeiro para produtores de wasabi</h1>
     <!-- Inputs  -->
-    Espaço da plantação (m²): <br>
-    <input placeholder="Digite o espaço da plantação em metros quadrado" type="number" id="input_area"> <br> <br>
+    <div class="div_conteudo">
+        <div class="div_calculadora">
+            <span>Espaço da plantação (m²):</span> <br>
+            <input placeholder="" type="number" id="input_area"> <br> <br>
 
-    Espaço entre as planta (cm): <br>
-    <input placeholder="Digite o espaço entre as plantas em centimetros" type="number" id="input_espaço"> <br> <br>
+            <span>Espaço entre as planta (cm): </span><br>
+            <input placeholder="recomendado de 20cm a 30cm" type="number" id="input_espaço"> <br> <br>
 
-    Custo de energia mensal (R$): <br>
-    <input placeholder="Digite qual é o custo de energia por mês" type="number" id="input_energia" width="200px"> <br>
-    <br>
+            <span>Custo de energia mensal (R$): </span><br>
+            <input placeholder="Digite qual é o custo de energia por mês" type="number" id="input_energia"
+                width="200px">
+            <br>
+            <br>
 
-    Custo de água mensal (R$): <br>
-    <input placeholder="Digite qual é o custo de água por mês" type="number" id="input_agua"> <br> <br>
+            <span>Custo de água mensal (R$): </span><br>
+            <input placeholder="Digite qual é o custo de água por mês" type="number" id="input_agua"> <br> <br>
 
-    Custo de manutenção mensal (R$): <br>
-    <input placeholder="Digite qual é o custo de manutenção por mês" type="number" id="input_manutencao"> <br> <br>
+            <span>Custo de manutenção mensal (R$): </span><br>
+            <input placeholder="Digite qual é o custo de manutenção por mês" type="number" id="input_manutencao"> <br>
+            <br>
 
-    Quanto você gasta com outros gastos por mês? (R$): <br>
-    <input placeholder="Digite qual é o custo de outros gastos por mês" type="number" id="input_outros"> <br> <br>
+            <span>Quanto você gasta com outros gastos por mês? (R$): </span><br>
+            <input placeholder="Digite qual é o custo de outros gastos por mês" type="number" id="input_outros"> <br>
+            <br>
 
-    Preço do quilo do Wasabi (R$): <br>
-    <input placeholder="Digite o preço do quilo do wasabi" type="number" id="input_preço"> <br> <br>
+            <span>Preço do quilo do Wasabi (R$):</span> <br>
+            <input placeholder="Digite o preço do quilo do wasabi" type="number" id="input_preço"> <br> <br>
 
-    <!-- Botões que chamam a função -->
-    <Button onclick="VerLucro()">Ver lucro</Button> <Button onclick="VerGastos()">Ver Gastos</Button> <br> <br>
+            <!-- Botões que chamam a função -->
+            <Button class="btn_lucro" onclick="VerLucro()">VER LUCRO</Button>
+            <Button class="btn_gastos" onclick="VerGastos()">VER GASTOS</Button>
+            <Button class="btn_reset" onclick="Redefinir()">REDEFINIR</Button> <br><br>
+        </div>
+        <!-- p onde irá aparecer a mensagem -->
+        <div class="div_mensagem">
+            <p>sem um bom controle de temperatura, a plantação pode sofrer uma 
+                deficiencia no desenvolvimento das raízes, que acaba reduzindo em até 
+                35% o peso do produto que por fim, resulta na redução do kg vendido.</p>
+            <p id="p_mensagem"></p>
+            <p id="p_infoSem"></p>
+            <p id="p_infoCom"></p>
+        </div>
+        <div>
 
-    <!-- Div onde irá aparecer a mensagem -->
-    <p id="div_mensagem"></p>
 </body>
 
 </html>
@@ -56,38 +177,82 @@
     var mensagem = "";
     var area = 0;
     var espaço = 0;
-    var preço = 0;
+    var preco = 0;
     var espaçoMetro = 0;
     var qtdMuda = 0;
     var pesoTotal = 0;
     var areaMuda = 0;
     var retorno = 0;
     var lucroLiquido = 0;
+    var pesoColhidoSem = 0;
+    var pesoColhidoCom = 0;
 
     function VerLucro() {
 
         area = Number(input_area.value); //variavel da area de plantação em Metros quadrados
         espaço = Number(input_espaço.value); //variavel de espaçamento entre as mudas em Centimetros
-        preço = Number(input_preço.value); //variavel do preço do quilo
+        preco = Number(input_preco.value); //variavel do preco do quilo
         espaçoMetro = espaço / 100; //variavel que transforma os Centimetros do espaçamento em Metros
         areaMuda = espaçoMetro * espaçoMetro; //variavel da area que cada muda em metros quadrados
         qtdMuda = area / areaMuda; //variavel da quantidade de mudas. Area inteira / por area de cada planta
         pesoTotal = qtdMuda * 0.12; //variavel do peso aproximado da safra em quilo (IMPORTANTE SABER QUE ESSE VALOR 0.12 é a media do peso em gram do wasabi)
-        retorno = pesoTotal * preço; //variavel do retorno completo da safra. peso kilo * preço kilo
-
-        // MENSAGEM QUE VAI TER EM TODOS AS SITUAÇÕES
-        mensagem = `
-            Com o cultivo correto e o auxilio do sensor de temperatura ONDO, 
-            você não terá perdas e a safra consiguirá um retorno de aproximadamente: R$${retorno.toFixed(2)}.<br>
-            Você deverá plantar ${Math.round(qtdMuda)} mudas de wasabi, que dará ${pesoTotal.toFixed(2)}KG <br>
-            `
-
+        pesoColhidoSem = pesoTotal * 0.65;
+        pesoColhidoCom = pesoTotal * 0.90;
+        lucroBrutoSem = pesoColhidoSem * preco; //variavel do retorno completo da safra. peso kilo * preco kilo
+        lucroBrutoCom = pesoColhidoCom * preco;
         energia = Number(input_energia.value) * 21 //variavel do custo de energia em 21 meses
         manutencao = Number(input_manutencao.value) * 21 //variavel do custo de manutenção em 21 meses
         agua = Number(input_agua.value) * 21 //variavel do custo de água em 21 meses
         outros = Number(input_outros.value) * 21 //variavel dos outros custos em 21 meses
         custoTotal = energia + manutencao + outros + agua //variavel do custo total em 21 meses
-        lucroLiquido = retorno - custoTotal //variavel do lucro liquido
+        lucroLiquidoSem = pesoColhidoSem - custoTotal //variavel do lucro liquido
+        lucroLiquidoCom = pesoColhidoCom - custoTotal //variavel do lucro liquido
+
+
+        // MENSAGEM QUE VAI TER EM TODOS AS SITUAÇÕES
+        mensagemSem = `<b>Sem a utilização de um controle de temperatura </b><br><br>
+        -gastos: ${custoTotal}<br>
+        -quilos plantados: ${pesoTotal}<br>
+        -quilos colhidos: ${pesoColhido}<br>
+        -lucro bruto: ${lucroBrutoSem}<br>
+        -lucro liquido: ${lucroLiquidoSem}<br>
+        `
+        mensagemCom = `<b>Utilizando o nosso controle de temperatura</b><br><br>
+        -gastos: ${custoTotal}<br>
+        -quilos plantados: ${pesoTotal}<br>
+        -quilos colhidos: ${pesoColhidoCom}<br>
+        -lucro bruto: ${lucroBrutoCom}<br>
+        -lucro liquido: ${lucroLiquidoCom}<br>
+        `
+        
+        
+        
+                    //  sem a utilização de um controle        |       com o nosso controle de    temperatura 
+                    // de temperatura                          |
+                    //                                         |
+                    // -gastos: 62178462                       |       -gastos: 1289728
+                    // -kg plantados: 2891387                  |       -kg plantados: 897873
+                    // -kg colhidos: 8789787                   |       -kg colhidos: 1271287
+                    // -lucro bruto: 898766                    |       -lucro bruto: 8912872
+                    // -lucro liquido: 982781                  |       -lucro liquido: 876387
+        mensagem = `
+
+            Com o cuidado correto e o auxilio do nosso sistema, 
+            As perdas que eram de 35%, passarão a ser até 10%, conseguindo uma safra com um retorno bruto de aproximadamente R$${retorno.toFixed(2)}.<br>
+            conseguirá plantar ${Math.round(qtdMuda)} mudas de wasabi, em ${area}m² de plantção com cada planta utilizando ${areaMuda}m² para se desenvolver. <br>
+            a produção será de ${pesoTotal.toFixed(2)}kg de wasabi. <br>
+
+            com a utilização do nosso sistema, a perda de produtos seria reduzida 
+            apenas para até 10% da colheita, assim alavancando os lucros gerados.
+
+
+
+
+
+
+            `
+
+       
 
         // INCREMENTANDO UMA MENSAGEM PERSONALIZADA COM BASE NO LUCRO LIQUIDO
         if (lucroLiquido == 0) {
@@ -107,7 +272,7 @@
             `
         }
         // MOSTRANDO A MENSAGEM 
-        div_mensagem.innerHTML = mensagem
+        p_mensagem.innerHTML = mensagem
     }
     // FUNCTION VER OS GASTOS 
     function VerGastos() {
@@ -134,19 +299,25 @@
         Água: R$${agua} <br> 
         Manutenção: R$${manutencao} <br> 
         Outros: R$${outros} <br> 
-        Totalizando um gasto de: <b style="color: red">R$${custoTotal}</b>`
+        Totalizando um gasto de: <b style="color: red">R$${custoTotal}</b>
+        `
 
-         // INCREMENTANDO UMA MENSAGEM PERSONALIZADA COM BASE NO LUCRO LIQUIDO
+        // INCREMENTANDO UMA MENSAGEM PERSONALIZADA COM BASE NO LUCRO LIQUIDO
         if (lucroLiquido == 0) {
             mensagem += `<b><br> Seus gastos estão igual ao retorno bruto! plante mais e/ou economise nos gastos;</b>`
         } else if (lucroLiquido > 0) {
-            mensagem += `<b><br> Seus gastos estão menor que o retonro bruto. Você está terá lucro;</b>`
+            mensagem += `<b><br>  Seus gastos esão menores que o retorno bruto. Você está terá lucro;</b>`
         } else {
-            mensagem += `<b><br>Seus gastos estão maiores que o retorno bruto. Você está tendo prejuizo</b>`
+            mensagem += `<b><br> Seus gastos estão maiores que o retorno bruto. Você está terá rejuizo</b>`
         }
-        
+
         // MOSTRANDO A MENSAGEM 
-        div_mensagem.innerHTML = mensagem
+        p_mensagem.innerHTML = mensagem
+    }
+    function teste() {
+        input_area = ""
+
+        input_agua.value = ""
     }
 
 </script>
