@@ -78,15 +78,24 @@
 
             if (lucroLiquido < 0) {
                 recomendacao = 'Sua empresa está com prejuízo. Considere reduzir despesas ou aumentar a receita para melhorar a rentabilidade.'
-            } else if (margemLucro < 10) {
+            }
+
+            if (margemLucro < 10) {
                 recomendacao = 'A margem de lucro está baixa. Avalie a possibilidade de aumentar o preço de venda ou reduzir custos.'
-            } else if (pontoEquilibrio > unidadesProduzidas) {
+            }
+
+            if (pontoEquilibrio > unidadesProduzidas) {
                 recomendacao = 'Você está produzindo menos do que o ponto de equilíbrio. Considere aumentar a produção ou reduzir custos fixos.'
-            } else if (roi < 15) {
+            }
+
+            if (roi < 15) {
                 recomendacao = 'O ROI está abaixo do ideal. Tente otimizar os investimentos ou aumentar a receita.'
-            } else {
+            }
+
+            if (lucroLiquido >= 0 && margemLucro >= 10 && pontoEquilibrio <= unidadesProduzidas && roi >= 15) {
                 recomendacao = 'Sua empresa está com uma situação financeira saudável. Continue monitorando seus indicadores e ajuste conforme necessário.'
             }
+
             p_recomendacao.innerHTML = recomendacao
         }
     </script>
