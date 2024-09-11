@@ -8,21 +8,37 @@
 </head>
 
 <!-- Inicio do HTML -->
+
 <body>
     <h1>Simulador Financeiro Ondo</h1>
 
-<!-- Inputs  -->
-    Inserir metros quadrados de plantação: <input type="number" id="input_area"> <br> <br>
-    Inserir espaçamento entre as mudas (recomendado: 30cm a 45cm): <input type="number" id="input_espaço"> <br> <br>
-    Por quanto vôce está vendendo o kilo do wasabi? (R$) <input type="number" id="input_preço"> <br> <br>
-    Inserir custo de energia Mensal (R$): <input type="number" id="input_energia"> <br> <br>
-    Inserir custo de manutenção Mensal (R$): <input type="number" id="input_manutencao"> <br> <br>
-    Inserir custo de água Mensal (R$): <input type="number" id="input_agua"> <br> <br>
-    Inserir outros custos mensais (R$): <input type="number" id="input_outros"> <br> <br>
-<!-- Botões que chamam a função -->
-    <Button onclick="VerLucro()">Ver lucro</Button> <!--<Button onclick="VerGastos()">Ver Gastos</Button> --> <br> <br>
-<!-- Div onde irá aparecer a mensagem -->
+    <!-- Inputs  -->
+    Espaço da plantação (m²): <br>
+    <input placeholder="Digite o espaço da plantação em metros quadrado" type="number" id="input_area"> <br> <br>
 
+    Espaço entre as planta (cm): <br>
+    <input placeholder="Digite o espaço entre as plantas em centimetros" type="number" id="input_espaço"> <br> <br>
+
+    Custo de energia mensal (R$): <br>
+    <input placeholder="Digite qual é o custo de energia por mês" type="number" id="input_energia" width="200px"> <br>
+    <br>
+
+    Custo de água mensal (R$): <br>
+    <input placeholder="Digite qual é o custo de água por mês" type="number" id="input_agua"> <br> <br>
+
+    Custo de manutenção mensal (R$): <br>
+    <input placeholder="Digite qual é o custo de manutenção por mês" type="number" id="input_manutencao"> <br> <br>
+
+    Quanto você gasta com outros gastos por mês? (R$): <br>
+    <input placeholder="Digite qual é o custo de outros gastos por mês" type="number" id="input_outros"> <br> <br>
+
+    Preço do quilo do Wasabi (R$): <br>
+    <input placeholder="Digite o preço do quilo do wasabi" type="number" id="input_preço"> <br> <br>
+
+    <!-- Botões que chamam a função -->
+    <Button onclick="VerLucro()">Ver lucro</Button> <Button onclick="VerGastos()">Ver Gastos</Button> <br> <br>
+
+    <!-- Div onde irá aparecer a mensagem -->
     <p id="div_mensagem"></p>
 </body>
 
@@ -31,44 +47,53 @@
 
 <!-- Inicio do Java Script -->
 <script>
+    // VARIAVEIS GLOBAIS, QUE SERÃO UTILIZADAS NAS DUAS FUNCTIONS
+    var energia = 0;
+    var manutencao = 0;
+    var agua = 0;
+    var outros = 0;
+    var custoTotal = 0;
+    var mensagem = "";
+    var area = 0;
+    var espaço = 0;
+    var preço = 0;
+    var espaçoMetro = 0;
+    var qtdMuda = 0;
+    var pesoTotal = 0;
+    var areaMuda = 0;
+    var retorno = 0;
+    var lucroLiquido = 0;
+
     function VerLucro() {
-        
-        var area = Number(input_area.value); //variavel da area de plantação em Metros quadrados
 
-        var espaço = Number(input_espaço.value); //variavel de espaçamento entre as mudas em Centimetros
+        area = Number(input_area.value); //variavel da area de plantação em Metros quadrados
+        espaço = Number(input_espaço.value); //variavel de espaçamento entre as mudas em Centimetros
+        preço = Number(input_preço.value); //variavel do preço do quilo
+        espaçoMetro = espaço / 100; //variavel que transforma os Centimetros do espaçamento em Metros
+        areaMuda = espaçoMetro * espaçoMetro; //variavel da area que cada muda em metros quadrados
+        qtdMuda = area / areaMuda; //variavel da quantidade de mudas. Area inteira / por area de cada planta
+        pesoTotal = qtdMuda * 0.12; //variavel do peso aproximado da safra em quilo (IMPORTANTE SABER QUE ESSE VALOR 0.12 é a media do peso em gram do wasabi)
+        retorno = pesoTotal * preço; //variavel do retorno completo da safra. peso kilo * preço kilo
 
-        var preço = Number(input_preço.value); //variavel do preço do quilo
-
-        var espaçoMetro = espaço / 100; //variavel que transforma os Centimetros do espaçamento em Metros
-
-        var areaMuda = espaçoMetro * espaçoMetro; //variavel da area que cada muda em metros quadrados
-
-        var qtdMuda = area / areaMuda; //variavel da quantidade de mudas. Area inteira / por area de cada planta
-
-        var pesoTotal = qtdMuda * 0.12; //variavel do peso aproximado da safra em quilo
-
-        var retorno = pesoTotal * preço; //variavel do retorno completo da safra. peso kilo * preço kilo
-
-        var preçoMuda = (pesoTotal / qtdMuda) * preço; //variavel do preço aproximado de cada muda
-
-        // Considerando um peso médio de 120 gramas por muda de Wasabi <-- LINHA QUE NAO SEI SE COLOCO
-        var mensagem = `
+        // MENSAGEM QUE VAI TER EM TODOS AS SITUAÇÕES
+        mensagem = `
             Com o cultivo correto e o auxilio do sensor de temperatura ONDO, 
             você não terá perdas e a safra consiguirá um retorno de aproximadamente: R$${retorno.toFixed(2)}.<br>
             Você deverá plantar ${Math.round(qtdMuda)} mudas de wasabi, que dará ${pesoTotal.toFixed(2)}KG <br>
             `
 
-        var energia = Number(input_energia.value) * 21 //variavel do custo de energia em 21 meses
-        var manutencao = Number(input_manutencao.value) * 21 //variavel do custo de manutenção em 21 meses
-        var agua = Number(input_agua.value) * 21 //variavel do custo de água em 21 meses
-        var outros = Number(input_outros.value) * 21 //variavel dos outros custos em 21 meses
-        var custoTotal = energia + manutencao + outros + agua //variavel do custo total em 21 meses
-        var lucroLiquido = retorno - custoTotal //variavel do lucro liquido
+        energia = Number(input_energia.value) * 21 //variavel do custo de energia em 21 meses
+        manutencao = Number(input_manutencao.value) * 21 //variavel do custo de manutenção em 21 meses
+        agua = Number(input_agua.value) * 21 //variavel do custo de água em 21 meses
+        outros = Number(input_outros.value) * 21 //variavel dos outros custos em 21 meses
+        custoTotal = energia + manutencao + outros + agua //variavel do custo total em 21 meses
+        lucroLiquido = retorno - custoTotal //variavel do lucro liquido
 
+        // INCREMENTANDO UMA MENSAGEM PERSONALIZADA COM BASE NO LUCRO LIQUIDO
         if (lucroLiquido == 0) {
             mensagem += `
             Ao final dessa safra (21 meses), não havera lucro.
-            Seu Lucro Liquido será igual há: R$${Math.round(lucroLiquido)}.<br>
+            Seu Lucro Liquido será igual há: <b>R$${Math.round(lucroLiquido)}</b>.<br>
             Conside plantar mais mudas e cortar gastos. Continuaremos a te ajudar a analisar temperatura. 
             `
         } else if (lucroLiquido > 0) {
@@ -77,12 +102,51 @@
             `
         } else {
             mensagem += `
-            Ao final dessa safra (21 meses), havera prejuízo. Que será de: R$${Math.round(lucroLiquido)}.<br>
-            Corrija sua plantação, a quantidade de muda que é possivel plantar e/ou seus custos. Continuaremos a te ajudar a analisar temperatura.
+            Ao final dessa safra (21 meses), havera prejuízo. Que será de: <b style="color: red">R$${Math.round(lucroLiquido)}</b>.<br>
+            Reveja sua plantação, a quantidade de muda que é possivel plantar e os custos que você tem. Continuaremos a te ajudar a analisar temperatura.
             `
         }
-
+        // MOSTRANDO A MENSAGEM 
         div_mensagem.innerHTML = mensagem
     }
-    
+    // FUNCTION VER OS GASTOS 
+    function VerGastos() {
+        //CHMAMANDO AS VARIAVEIS E ATRIBUINDO VALORES 
+        area = Number(input_area.value); //variavel da area de plantação em Metros quadrados
+        espaço = Number(input_espaço.value); //variavel de espaçamento entre as mudas em Centimetros
+        preço = Number(input_preço.value); //variavel do preço do quilo
+        espaçoMetro = espaço / 100; //variavel que transforma os Centimetros do espaçamento em Metros
+        areaMuda = espaçoMetro * espaçoMetro; //variavel da area que cada muda em metros quadrados
+        qtdMuda = area / areaMuda; //variavel da quantidade de mudas. Area inteira / por area de cada planta
+        pesoTotal = qtdMuda * 0.12; //variavel do peso aproximado da safra em quilo (IMPORTANTE SABER QUE ESSE VALOR 0.12 é a media do peso em gram do wasabi)
+        retorno = pesoTotal * preço; //variavel do retorno completo da safra. peso kilo * preço kilo
+
+        energia = Number(input_energia.value) * 21 //variavel do custo de energia em 21 meses
+        manutencao = Number(input_manutencao.value) * 21 //variavel do custo de manutenção em 21 meses
+        agua = Number(input_agua.value) * 21 //variavel do custo de água em 21 meses
+        outros = Number(input_outros.value) * 21 //variavel dos outros custos em 21 meses
+        custoTotal = energia + manutencao + outros + agua //variavel do custo total em 21 meses
+        lucroLiquido = retorno - custoTotal //variavel do lucro liquido
+
+        // MENSAGEM QUE VAI TER EM TODOS AS SITUAÇÕES
+        mensagem = `Ao final dessa safra (21 meses) seus gastos foram: <br>
+        Energia: R$${energia} <br> 
+        Água: R$${agua} <br> 
+        Manutenção: R$${manutencao} <br> 
+        Outros: R$${outros} <br> 
+        Totalizando um gasto de: <b style="color: red">R$${custoTotal}</b>`
+
+         // INCREMENTANDO UMA MENSAGEM PERSONALIZADA COM BASE NO LUCRO LIQUIDO
+        if (lucroLiquido == 0) {
+            mensagem += `<b><br> Seus gastos estão igual ao retorno bruto! plante mais e/ou economise nos gastos;</b>`
+        } else if (lucroLiquido > 0) {
+            mensagem += `<b><br> Seus gastos estão menor que o retonro bruto. Você está terá lucro;</b>`
+        } else {
+            mensagem += `<b><br>Seus gastos estão maiores que o retorno bruto. Você está tendo prejuizo</b>`
+        }
+        
+        // MOSTRANDO A MENSAGEM 
+        div_mensagem.innerHTML = mensagem
+    }
+
 </script>
